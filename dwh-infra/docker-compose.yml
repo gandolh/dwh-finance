@@ -1,0 +1,50 @@
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: dwh_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: dwh_finance
+
+  mongo-express:
+    image: mongo-express
+    container_name: dwh_mongo_ui
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://mongodb:27017/
+      ME_CONFIG_BASICAUTH: false
+    depends_on:
+      - mongodb
+
+  # # Optional: Apache Spark Cluster (for running analytics jobs)
+  # # If you just run `python src/analytics/aggregation_job.py` locally, PySpark will use a local mode.
+  # # This cluster is provided if you want to run it in a distributed environment.
+  # spark-master:
+  #   image: bitnami/spark:3.4.1
+  #   container_name: dwh_spark_master
+  #   profiles: ["spark"]
+  #   environment:
+  #     - SPARK_MODE=master
+  #   ports:
+  #     - "8080:8080"
+  #     - "7077:7077"
+
+  # spark-worker:
+  #   image: bitnami/spark:3.4.1
+  #   container_name: dwh_spark_worker
+  #   profiles: ["spark"]
+  #   environment:
+  #     - SPARK_MODE=worker
+  #     - SPARK_MASTER_URL=spark://spark-master:7077
+  #     - SPARK_WORKER_MEMORY=1G
+  #     - SPARK_WORKER_CORES=1
+  #   depends_on:
+  #     - spark-master
+
+volumes:
+  mongodb_data:

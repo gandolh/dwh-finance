@@ -1,0 +1,6 @@
+[
+  { "symbol": "AAPL", "assetType": "stock", "region": "US" },
+  { "symbol": "MSFT", "assetType": "stock", "region": "US" },
+  { "symbol": "BTC/USD", "assetType": "crypto", "region": "Global" },
+  { "symbol": "EUR/USD", "assetType": "other", "region": "Global" }
+]

@@ -1,0 +1,5 @@
+[
+  { "symbol": "bitcoin", "assetType": "crypto", "region": "Global" },
+  { "symbol": "ethereum", "assetType": "crypto", "region": "Global" },
+  { "symbol": "solana", "assetType": "crypto", "region": "Global" }
+]

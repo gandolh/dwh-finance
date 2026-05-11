@@ -1,0 +1,4 @@
+[
+  { "symbol": "AAPL", "assetType": "stock", "region": "US" },
+  { "symbol": "TSLA", "assetType": "stock", "region": "US" }
+]

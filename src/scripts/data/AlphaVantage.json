@@ -1,0 +1,5 @@
+[
+  { "symbol": "AAPL", "assetType": "stock", "region": "US" },
+  { "symbol": "MSFT", "assetType": "stock", "region": "US" },
+  { "symbol": "GOOGL", "assetType": "stock", "region": "US" }
+]
