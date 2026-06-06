@@ -62,7 +62,7 @@ npm run mcp        # start the MCP server on stdio
 
 ### Analytics
 
-The Spark jobs run as containers against the same Mongo. See `dwh-infra/run-job.sh` and the compose file for the cluster. The jobs read from `exchangerecords` and write `analytics_results` / predictions back.
+The Spark jobs run as containers against the same Mongo. See `dwh-infra/run-job.sh` and the compose file for the cluster. The jobs read from `exchangerecords` and write `analytics_yearly_summary` / `price_predictions` back.
 
 ## Tests
 
