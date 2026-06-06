@@ -17,7 +17,6 @@
     <button class="tab" data-tab="providers">Providers</button>
     <button class="tab" data-tab="timeseries">Time Series</button>
     <button class="tab" data-tab="analytics">Analytics</button>
-    <button class="tab" data-tab="assistant">Assistant</button>
   </nav>
 
   <main>
@@ -120,27 +119,6 @@
         <thead><tr><th>Time</th><th>Actual</th><th>Prediction</th></tr></thead>
         <tbody></tbody>
       </table>
-    </section>
-
-    <!-- ============ ASSISTANT (UC4 — TODO) ============ -->
-    <section id="assistant" class="panel">
-      <h2>LLM Assistant <span class="uc todo">UC4 &middot; coming soon</span></h2>
-      <div class="todo-card">
-        <p><strong>Natural-language assistant — planned, not yet wired.</strong></p>
-        <p>
-          The platform exposes its capabilities as MCP tools
-          (<code>list_assets</code>, <code>get_asset_details</code>,
-          <code>get_time_series</code>, <code>get_analytics_summary</code>) backed by the same
-          repositories this UI uses.
-        </p>
-        <p>
-          The current MCP server speaks <strong>stdio</strong> transport, so a browser cannot reach
-          it directly. The next step is a natural-language chat panel powered by an
-          <strong>Ollama Cloud</strong> key that plans which tools to call and answers grounded in
-          the warehouse data.
-        </p>
-        <p class="muted">No network calls are made from this tab yet.</p>
-      </div>
     </section>
   </main>
 
