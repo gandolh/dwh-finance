@@ -18,6 +18,7 @@ export interface AlphaVantageResponse {
   'Time Series (Daily)'?: Record<string, AlphaVantageDailyQuote>;
   'Error Message'?: string;
   Note?: string;
+  Information?: string;
 }
 
 export interface CoinGeckoRequest {

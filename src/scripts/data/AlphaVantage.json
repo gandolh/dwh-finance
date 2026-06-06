@@ -1,5 +1,10 @@
 [
   { "symbol": "AAPL", "assetType": "stock", "region": "US" },
   { "symbol": "MSFT", "assetType": "stock", "region": "US" },
-  { "symbol": "GOOGL", "assetType": "stock", "region": "US" }
+  { "symbol": "GOOGL", "assetType": "stock", "region": "US" },
+  { "symbol": "AMZN", "assetType": "stock", "region": "US" },
+  { "symbol": "NVDA", "assetType": "stock", "region": "US" },
+  { "symbol": "META", "assetType": "stock", "region": "US" },
+  { "symbol": "JPM", "assetType": "stock", "region": "US" },
+  { "symbol": "IBM", "assetType": "stock", "region": "US" }
 ]

@@ -38,7 +38,7 @@ export class IngestionService {
 
   private async extract(extractor: BaseExtractor, symbol: string): Promise<RawTimeSeriesPoint[]> {
     const endDate = dayjs();
-    const startDate = dayjs().subtract(3, 'day');
+    const startDate = dayjs().subtract(30, 'day');
 
     const data = await extractor.fetch(symbol, startDate.toDate(), endDate.toDate());
     logger.info({ count: data.length, symbol }, 'Extracted records');

@@ -1,4 +1,10 @@
 [
   { "symbol": "EUR..USD", "assetType": "other", "region": "Global" },
-  { "symbol": "GBP..USD", "assetType": "other", "region": "Global" }
+  { "symbol": "GBP..USD", "assetType": "other", "region": "Global" },
+  { "symbol": "USD..JPY", "assetType": "other", "region": "Global" },
+  { "symbol": "USD..CHF", "assetType": "other", "region": "Global" },
+  { "symbol": "USD..CAD", "assetType": "other", "region": "Global" },
+  { "symbol": "EUR..GBP", "assetType": "other", "region": "Europe" },
+  { "symbol": "EUR..RON", "assetType": "other", "region": "Europe" },
+  { "symbol": "USD..CNY", "assetType": "other", "region": "China" }
 ]

@@ -1,4 +1,9 @@
 [
   { "symbol": "AAPL", "assetType": "stock", "region": "US" },
-  { "symbol": "TSLA", "assetType": "stock", "region": "US" }
+  { "symbol": "TSLA", "assetType": "stock", "region": "US" },
+  { "symbol": "MSFT", "assetType": "stock", "region": "US" },
+  { "symbol": "NVDA", "assetType": "stock", "region": "US" },
+  { "symbol": "AMD", "assetType": "stock", "region": "US" },
+  { "symbol": "SPY", "assetType": "index", "region": "US" },
+  { "symbol": "QQQ", "assetType": "index", "region": "US" }
 ]

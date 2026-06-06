@@ -1,5 +1,14 @@
 [
   { "symbol": "bitcoin", "assetType": "crypto", "region": "Global" },
   { "symbol": "ethereum", "assetType": "crypto", "region": "Global" },
-  { "symbol": "solana", "assetType": "crypto", "region": "Global" }
+  { "symbol": "solana", "assetType": "crypto", "region": "Global" },
+  { "symbol": "cardano", "assetType": "crypto", "region": "Global" },
+  { "symbol": "ripple", "assetType": "crypto", "region": "Global" },
+  { "symbol": "dogecoin", "assetType": "crypto", "region": "Global" },
+  { "symbol": "polkadot", "assetType": "crypto", "region": "Global" },
+  { "symbol": "litecoin", "assetType": "crypto", "region": "Global" },
+  { "symbol": "chainlink", "assetType": "crypto", "region": "Global" },
+  { "symbol": "avalanche-2", "assetType": "crypto", "region": "Global" },
+  { "symbol": "matic-network", "assetType": "crypto", "region": "Global" },
+  { "symbol": "binancecoin", "assetType": "crypto", "region": "Global" }
 ]

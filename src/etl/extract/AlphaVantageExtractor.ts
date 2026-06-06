@@ -6,6 +6,18 @@ import dayjs from 'dayjs';
 
 dotenv.config();
 
+// Alpha Vantage's free tier enforces ~1 request/second.
+const MIN_REQUEST_INTERVAL_MS = 1200;
+let lastRequestAt = 0;
+
+async function throttle(): Promise<void> {
+  const waitMs = lastRequestAt + MIN_REQUEST_INTERVAL_MS - Date.now();
+  if (waitMs > 0) {
+    await new Promise((resolve) => setTimeout(resolve, waitMs));
+  }
+  lastRequestAt = Date.now();
+}
+
 export class AlphaVantageExtractor extends BaseExtractor {
   private apiKey = process.env.ALPHA_VANTAGE_API_KEY || '';
 
@@ -20,12 +32,12 @@ export class AlphaVantageExtractor extends BaseExtractor {
     };
 
     try {
+      await throttle();
       const response = await axios.get<AlphaVantageResponse>(requestUrl, { params });
 
-      if (response.data['Error Message'] || response.data['Note']) {
-        throw new Error(
-          `Alpha Vantage Error/Limit for ${symbol}: ${response.data['Error Message'] || response.data['Note']}`
-        );
+      const apiMessage = response.data['Error Message'] || response.data['Note'] || response.data['Information'];
+      if (apiMessage) {
+        throw new Error(`Alpha Vantage Error/Limit for ${symbol}: ${apiMessage}`);
       }
 
       const timeSeries = response.data['Time Series (Daily)'];

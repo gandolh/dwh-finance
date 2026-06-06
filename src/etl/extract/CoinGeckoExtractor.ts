@@ -12,9 +12,11 @@ export class CoinGeckoExtractor extends BaseExtractor {
   async fetch(symbol: string, startDate?: Date, endDate?: Date): Promise<RawTimeSeriesPoint[]> {
     const requestUrl = `https://api.coingecko.com/api/v3/coins/${symbol.toLowerCase()}/market_chart`;
 
+    const days = startDate ? String(Math.max(1, dayjs().diff(dayjs(startDate), 'day') + 1)) : 'max';
+
     const params: CoinGeckoRequest = {
       vs_currency: 'usd',
-      days: startDate ? '3' : 'max',
+      days,
       interval: 'daily',
     };
 
