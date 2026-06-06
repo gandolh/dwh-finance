@@ -12,6 +12,7 @@
     "mcp": "tsx src/mcp/index.ts",
     "ingest": "tsx src/scripts/ingest.ts",
     "test": "vitest --pool=forks",
+    "test:run": "vitest run --pool=forks",
     "format": "prettier --write src/**/*.ts tests/**/*.ts --no-config --print-width 120 --single-quote --trailing-comma es5"
   },
   "keywords": [],
