@@ -11,7 +11,13 @@ export const analyticsRoutes = async (fastify: FastifyInstance, options: Fastify
   });
 
   fastify.get('/predictions', async (request, reply) => {
-    const predictions = await analyticsRepository.getLatestPredictions();
+    const { assetId } = request.query as { assetId?: string };
+    if (!assetId) {
+      // Predictions are per-asset; without one there is nothing meaningful to
+      // chart. Return empty so the UI can prompt the user to pick an asset.
+      return [];
+    }
+    const predictions = await analyticsRepository.getLatestPredictions(assetId);
     return predictions;
   });
 };

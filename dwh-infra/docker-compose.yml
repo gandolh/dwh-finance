@@ -21,30 +21,36 @@ services:
     depends_on:
       - mongodb
 
-  # # Optional: Apache Spark Cluster (for running analytics jobs)
-  # # If you just run `python src/analytics/aggregation_job.py` locally, PySpark will use a local mode.
-  # # This cluster is provided if you want to run it in a distributed environment.
-  # spark-master:
-  #   image: bitnami/spark:3.4.1
-  #   container_name: dwh_spark_master
-  #   profiles: ["spark"]
-  #   environment:
-  #     - SPARK_MODE=master
-  #   ports:
-  #     - "8080:8080"
-  #     - "7077:7077"
+  spark-master:
+    build:
+      context: .
+      dockerfile: spark.Dockerfile
+    image: dwh-finance/spark:3.5.8
+    container_name: dwh_spark_master
+    command: >
+      /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master
+    environment:
+      - SPARK_NO_DAEMONIZE=true
+    volumes:
+      - ../src:/opt/dwh/src:ro
+    ports:
+      - "8080:8080"
+      - "7077:7077"
 
-  # spark-worker:
-  #   image: bitnami/spark:3.4.1
-  #   container_name: dwh_spark_worker
-  #   profiles: ["spark"]
-  #   environment:
-  #     - SPARK_MODE=worker
-  #     - SPARK_MASTER_URL=spark://spark-master:7077
-  #     - SPARK_WORKER_MEMORY=1G
-  #     - SPARK_WORKER_CORES=1
-  #   depends_on:
-  #     - spark-master
+  spark-worker:
+    build:
+      context: .
+      dockerfile: spark.Dockerfile
+    image: dwh-finance/spark:3.5.8
+    container_name: dwh_spark_worker
+    command: >
+      /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker
+      spark://spark-master:7077
+      --cores 1 --memory 1G
+    environment:
+      - SPARK_NO_DAEMONIZE=true
+    depends_on:
+      - spark-master
 
 volumes:
   mongodb_data:

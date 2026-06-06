@@ -1,13 +1,18 @@
 import fastify from 'fastify';
 import cors from '@fastify/cors';
+import fastifyStatic from '@fastify/static';
 import swagger from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { assetRoutes } from './routes/assetRoutes.ts';
 import { dataRoutes } from './routes/dataRoutes.ts';
 import { providerRoutes } from './routes/providerRoutes.ts';
 import { analyticsRoutes } from './routes/analyticsRoutes.ts';
 
 import { loggerConfig } from '../utils/logger.ts';
+
+const currentDir = path.dirname(fileURLToPath(import.meta.url));
 
 export async function buildApp() {
   const application = fastify({
@@ -32,6 +37,11 @@ export async function buildApp() {
 
   await application.register(swaggerUi, {
     routePrefix: '/docs',
+  });
+
+  await application.register(fastifyStatic, {
+    root: path.join(currentDir, '../../public'),
+    prefix: '/',
   });
 
   application.get('/health', async () => {

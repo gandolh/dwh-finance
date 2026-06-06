@@ -1,8 +1,8 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
 export interface AnalyticsSummaryInterface extends Document {
-  assetId: mongoose.Types.ObjectId;
-  providerId: mongoose.Types.ObjectId;
+  assetId: string;
+  providerId: string;
   year: number;
   avg_close: number;
   max_high: number;
@@ -12,8 +12,10 @@ export interface AnalyticsSummaryInterface extends Document {
 
 const AnalyticsSummarySchema: Schema = new Schema(
   {
-    assetId: { type: Schema.Types.ObjectId, ref: 'Asset', required: true },
-    providerId: { type: Schema.Types.ObjectId, ref: 'DataProvider', required: true },
+    // Stored as plain strings by the Spark aggregation job (the Mongo Spark
+    // connector represents ObjectId as string and cannot write it back as BSON).
+    assetId: { type: String, required: true },
+    providerId: { type: String, required: true },
     year: { type: Number, required: true },
     avg_close: { type: Number },
     max_high: { type: Number },

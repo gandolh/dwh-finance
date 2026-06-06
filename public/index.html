@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Financial Data Warehouse</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Financial Data Warehouse</h1>
+    <p class="subtitle">Acme Ltd &mdash; bi-temporal market data platform</p>
+  </header>
+
+  <nav id="tabs">
+    <button class="tab active" data-tab="assets">Assets</button>
+    <button class="tab" data-tab="providers">Providers</button>
+    <button class="tab" data-tab="timeseries">Time Series</button>
+    <button class="tab" data-tab="analytics">Analytics</button>
+    <button class="tab" data-tab="assistant">Assistant</button>
+  </nav>
+
+  <main>
+    <!-- ============ ASSETS (Q1, Q2, temporal) ============ -->
+    <section id="assets" class="panel active">
+      <h2>Assets <span class="uc">Q1 &middot; Q2 &middot; temporal</span></h2>
+      <div class="toolbar">
+        <label>Offset <input type="number" id="assets-offset" value="0" min="0" /></label>
+        <label>Limit <input type="number" id="assets-limit" value="20" min="1" /></label>
+        <button id="assets-reload">Load assets</button>
+        <span class="status" id="assets-status"></span>
+      </div>
+      <div class="split">
+        <div class="list-col">
+          <table id="assets-table">
+            <thead>
+              <tr><th>Symbol</th><th>Type</th><th>Region</th><th>Description</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="detail-col">
+          <div id="asset-detail" class="detail empty">Select an asset to see details, temporal state and version history.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROVIDERS (Q3, Q4) ============ -->
+    <section id="providers" class="panel">
+      <h2>Data Providers <span class="uc">Q3 &middot; Q4</span></h2>
+      <div class="toolbar">
+        <button id="providers-reload">Load providers</button>
+        <span class="status" id="providers-status"></span>
+      </div>
+      <div class="split">
+        <div class="list-col">
+          <table id="providers-table">
+            <thead>
+              <tr><th>Name</th><th>API ver.</th><th>Active</th><th>Attributes</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="detail-col">
+          <div id="provider-detail" class="detail empty">Select a provider to see its full details.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TIME SERIES (Q5) ============ -->
+    <section id="timeseries" class="panel">
+      <h2>Time Series <span class="uc">Q5</span></h2>
+      <div class="toolbar wrap">
+        <label>Asset
+          <select id="ts-asset"><option value="">— pick asset —</option></select>
+        </label>
+        <label>Provider
+          <select id="ts-provider"><option value="">— pick asset first —</option></select>
+        </label>
+        <label>Start <input type="date" id="ts-start" /></label>
+        <label>End <input type="date" id="ts-end" /></label>
+        <label>Limit <input type="number" id="ts-limit" value="50" min="1" /></label>
+        <button id="ts-load">Load series</button>
+        <button id="ts-more" disabled>Load more</button>
+        <span class="status" id="ts-status"></span>
+      </div>
+      <canvas id="ts-chart" width="900" height="280"></canvas>
+      <table id="ts-table">
+        <thead><tr><th>Timestamp</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- ============ ANALYTICS (UC3) ============ -->
+    <section id="analytics" class="panel">
+      <h2>Analytics &amp; Forecasts <span class="uc">UC3</span></h2>
+
+      <h3>Yearly summaries</h3>
+      <div class="toolbar wrap">
+        <label>Asset (optional)
+          <select id="an-asset"><option value="">— all assets —</option></select>
+        </label>
+        <button id="an-summaries">Load summaries</button>
+        <span class="status" id="an-summaries-status"></span>
+      </div>
+      <table id="an-summaries-table">
+        <thead>
+          <tr><th>Asset</th><th>Year</th><th>Avg close</th><th>Max high</th><th>Min low</th><th>Records</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <h3>Price predictions</h3>
+      <div class="toolbar">
+        <button id="an-predictions">Load predictions</button>
+        <span class="status" id="an-predictions-status"></span>
+      </div>
+      <canvas id="an-chart" width="900" height="260"></canvas>
+      <table id="an-predictions-table">
+        <thead><tr><th>Time</th><th>Actual</th><th>Prediction</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- ============ ASSISTANT (UC4 — TODO) ============ -->
+    <section id="assistant" class="panel">
+      <h2>LLM Assistant <span class="uc todo">UC4 &middot; coming soon</span></h2>
+      <div class="todo-card">
+        <p><strong>Natural-language assistant — planned, not yet wired.</strong></p>
+        <p>
+          The platform exposes its capabilities as MCP tools
+          (<code>list_assets</code>, <code>get_asset_details</code>,
+          <code>get_time_series</code>, <code>get_analytics_summary</code>) backed by the same
+          repositories this UI uses.
+        </p>
+        <p>
+          The current MCP server speaks <strong>stdio</strong> transport, so a browser cannot reach
+          it directly. The next step is a natural-language chat panel powered by an
+          <strong>Ollama Cloud</strong> key that plans which tools to call and answers grounded in
+          the warehouse data.
+        </p>
+        <p class="muted">No network calls are made from this tab yet.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
